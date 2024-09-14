@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Form</title>
+    <style>
+        table{
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table,td,th{
+            border: 2px;
+            border-style: solid;
+            border-color: rgb(0, 0, 0);
+            background-color: rgb(174, 229, 233);
+            border-radius: 5px;
+            
+        }
+        td,th{
+            padding: 6px;
+            text-align: left;
+            border-radius: 5px;
+        }
+        button{
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        t1{
+            margin: 10px;
+            padding: 5px;
+        }
+    </style>
+    <body>
+<form id="form1">
+<table id="t1" border="5">
+<tr>
+    <td>Name</td>
+    <td><input id="name" type="text" placeholder="Enter your Name"></td>
+</tr>
+<tr>
+    <td>Age</td>
+    <td><input id="age" type="number" placeholder="Enter your Age"></td>
+</tr>
+<tr>
+    <td>Gender</td>
+    <td><input type="radio" name="gender" id="male" value="Male">Male
+        <input type="radio"name="gender" id="female" value="Female">Female</td>
+</tr>
+<tr>
+    <td>Course</td>
+    <td><select id="course">
+        <option>Python</option>
+        <option>Web Development</option>
+        <option>Java</option>
+        <option>Php</option>
+        <option>JavaScript</option>
+        <option>Ruby</option>
+    </select>
+    </td>
+</tr>
+<tr>
+    <td>E-mail</td>
+    <td><input type="email" id="email" placeholder="xyz@gmail.com"></td>
+</tr>
+<tr>
+    <td><button onclick="display(event)" type="button">Save</button></td>
+</tr>
+</table>
+<hr>
+<hr>
+<table class="result" border="4">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Course</th>
+        <th>Gender</th>
+        <th>E-mail</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+        <!---new rows printed here-->
+    </tbody>
+</table>
+</form>
+<script>
+    function display(event){
+    event.preventDefault();
+    //get values
+    var name=document.getElementById('name').value;
+    var age=document.getElementById('age').value;
+    var gender=document.querySelector('input[name="gender"]:checked');
+    var course=document.getElementById('course').value;
+    var email=document.getElementById('email').value;
+
+    // Check if gender is selected
+    var genderValue = gender ? gender.value : 'Not specified';
+    
+    //create a new row
+      var row=document.createElement('tr');
+      row.innerHTML = `<td>${name}</td><td>${age}</td><td>${course}</td><td>${genderValue}</td><td>${email}</td><td><button onclick="deleteRow(this)">Delete</button></td>`;
+        
+    //append the new row to the result table
+    var resultTable=document.querySelector(".result tbody");
+    resultTable.appendChild(row);
+    }
+
+    function deleteRow(button)
+    {
+        var row = button.parentNode.parentNode;
+        row.parentNode.removeChild(row);
+
+    }
+</script>
+</body>
+</html>
